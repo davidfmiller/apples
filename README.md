@@ -1,7 +1,6 @@
 # apples
 
-Simple shell scripts that wrap access to Mac applications
-
+Simple command-line scripts that wrap access to Mac applications
 
 ## transmit
 
