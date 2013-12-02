@@ -1,11 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""
+Access Transmit's Dock Send from the command-line
+"""
+
 import sys
 import os
 import getopt
 import tempfile
 import subprocess
+
+if __name__ != '__main__':
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
 
 try:
   opts, args = getopt.getopt(sys.argv[1:], 'v')
