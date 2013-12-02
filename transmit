@@ -10,7 +10,7 @@ import subprocess
 try:
   opts, args = getopt.getopt(sys.argv[1:], 'v')
 except getopt.GetoptError:
-  print 'incorrect usage'
+  sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
 
 if not args:
@@ -19,35 +19,42 @@ if not args:
 verbose = False
 
 for opt, arg in opts:
-#  if opt == '-a':
-#    showHidden = True
   if opt == '-v':
     verbose = True
 
 if len(args) == 0:
   args.append('')
 
+cmd = ''
+
 for arg in args:
 
   path = os.path.join(os.getcwd(), arg)
 
   if not os.path.exists(path):
-    sys.stderr.write(path + " does not exist")
+    sys.stderr.write("📄  " + path + " does not exist\n")
     continue
   elif os.path.isdir(path):
-    sys.stderr.write(path + " is a folder\n")
+    if verbose:
+      sys.stderr.write("📂  " + path + " is a folder\n")
     continue
 
-  cmd = "tell application \"Transmit\"\n  set f to POSIX file \"" + path + "\"\n  open f\nend tell\n"
+  cmd += "  set f to POSIX file \"" + path + "\"\n  open f\n"
 
+if cmd:
+  cmd = "tell application \"Transmit\"\n" + cmd + "end tell\n" 
   f = tempfile.NamedTemporaryFile(delete=False)
 
   f.write(cmd)
 
   if verbose:
     f.seek(0)
-    sys.stdout.write(f.read())
+    sys.stdout.write("🍎")
+    sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
 
   f.close()
 
   out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
+
+elif verbose:
+    sys.stderr.write("🚫  No files to Transmit\n")
