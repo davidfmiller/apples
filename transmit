@@ -56,5 +56,5 @@ if cmd:
 
   out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
 
-elif verbose:
+else:
     sys.stderr.write("🚫  No files to Transmit\n")
