@@ -1,0 +1,53 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+import getopt
+import tempfile
+import subprocess
+
+try:
+  opts, args = getopt.getopt(sys.argv[1:], 'v')
+except getopt.GetoptError:
+  print 'incorrect usage'
+  sys.exit(2)
+
+if not args:
+  args = []
+
+verbose = False
+
+for opt, arg in opts:
+#  if opt == '-a':
+#    showHidden = True
+  if opt == '-v':
+    verbose = True
+
+if len(args) == 0:
+  args.append('')
+
+for arg in args:
+
+  path = os.path.join(os.getcwd(), arg)
+
+  if not os.path.exists(path):
+    sys.stderr.write(path + " does not exist")
+    continue
+  elif os.path.isdir(path):
+    sys.stderr.write(path + " is a folder\n")
+    continue
+
+  cmd = "tell application \"Transmit\"\n  set f to POSIX file \"" + path + "\"\n  open f\nend tell\n"
+
+  f = tempfile.NamedTemporaryFile(delete=False)
+
+  f.write(cmd)
+
+  if verbose:
+    f.seek(0)
+    sys.stdout.write(f.read())
+
+  f.close()
+
+  out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
