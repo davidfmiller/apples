@@ -1,0 +1,66 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""
+Send a file to LaunchBar from the command-line
+"""
+
+import sys
+import os
+import getopt
+import tempfile
+import subprocess
+
+if __name__ != '__main__':
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+try:
+  opts, args = getopt.getopt(sys.argv[1:], 'v')
+except getopt.GetoptError:
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+if not args:
+  args = []
+
+verbose = False
+
+for opt, arg in opts:
+  if opt == '-v':
+    verbose = True
+
+if len(args) == 0:
+  args.append('')
+elif len(args) > 1:
+  sys.stderr.write("🚫  Only 1 item can be launched\n")
+  sys.exit(2)
+
+
+arg = args[0]
+
+path = os.path.join(os.getcwd(), arg)
+
+if not os.path.exists(path):
+  sys.stderr.write("🚫  " + path + " does not exist\n")
+  sys.exit(2)
+
+cmd = "  set f to POSIX file \"" + path + "\"\n  open f\n"
+
+if cmd:
+  cmd = "tell application \"LaunchBar\"\n" + cmd + "end tell\n" 
+  f = tempfile.NamedTemporaryFile(delete=False)
+
+  f.write(cmd)
+
+  if verbose:
+    f.seek(0)
+    sys.stdout.write("🚀")
+    sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
+
+  f.close()
+
+  out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
+
+else:
+    sys.stderr.write("🚫  No files to launch\n")
