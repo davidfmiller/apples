@@ -39,8 +39,14 @@ cmd = ''
 if len(args):
   for word in args:
     app = " ".join([word[0].upper() + word[1:] for word in word.split()])
-    if app == 'coda':
+
+    if app == 'Coda':
       app = 'Coda 2'
+    elif app == 'Activity':
+      app = 'Activity Monitor'
+    elif app == 'Notational':
+      app = 'Notational Velocity'
+
     apps.append(app)
 
 for a in apps:
