@@ -17,6 +17,14 @@ Send a file/folder to [Launchbar](http://www.obdev.at/products/launchbar/index.h
 	> launchbar ~/Documents/git/davidfmiller.github.com/index.html
 
 
+## app
+
+Open/activate a Mac application from the terminal
+
+	> app mail preview
+
+… will open both Mail.app and Preview.app
+
 ### Disclaimer
 
 All trademarks & copyrights remain the property of their respective owners.
