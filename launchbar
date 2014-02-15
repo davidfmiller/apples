@@ -36,10 +36,15 @@ elif len(args) > 1:
   sys.stderr.write("🚫  Only 1 item can be launched\n")
   sys.exit(2)
 
-
 arg = args[0]
 
-path = os.path.join(os.getcwd(), arg)
+if  arg == '.':
+  arg = ''
+elif arg == '..':
+  path = os.path.dirname(os.getcwd())lau
+  arg = ''
+else:
+  path = os.path.join(os.getcwd(), arg)
 
 if not os.path.exists(path):
   sys.stderr.write("🚫  " + path + " does not exist\n")
