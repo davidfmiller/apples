@@ -41,7 +41,7 @@ arg = args[0]
 if  arg == '.':
   arg = ''
 elif arg == '..':
-  path = os.path.dirname(os.getcwd())lau
+  path = os.path.dirname(os.getcwd())
   arg = ''
 else:
   path = os.path.join(os.getcwd(), arg)
