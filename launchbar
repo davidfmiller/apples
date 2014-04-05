@@ -37,9 +37,11 @@ elif len(args) > 1:
   sys.exit(2)
 
 arg = args[0]
+path = ''
 
 if  arg == '.':
   arg = ''
+  path = os.getcwd()
 elif arg == '..':
   path = os.path.dirname(os.getcwd())
   arg = ''
