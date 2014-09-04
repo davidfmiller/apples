@@ -25,6 +25,12 @@ Open/activate a Mac application from the terminal
 
 … will open both Mail.app and Preview.app
 
+chrome → Google Chrome
+
+qt | quicktime → Quicktime Player
+
+activity → Activity Monitor
+
 ### Disclaimer
 
 All trademarks & copyrights remain the property of their respective owners.
