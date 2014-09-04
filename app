@@ -46,6 +46,11 @@ if len(args):
       app = 'Activity Monitor'
     elif app == 'Notational':
       app = 'Notational Velocity'
+    elif app == 'Qt' or app == 'Quicktime':
+      app = 'Quicktime Player'
+    elif app == 'Chrome':
+      app = 'Google Chrome'
+
 
     apps.append(app)
 
