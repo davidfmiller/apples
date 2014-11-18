@@ -50,6 +50,29 @@ if len(args):
       app = 'Quicktime Player'
     elif app == 'Chrome':
       app = 'Google Chrome'
+    elif app == 'Mission':
+      app = 'Mission Control'
+    elif app == 'Preferences':
+      app = 'System Preferences'
+    elif app == 'Store':
+      app = 'App Store'
+    elif app == 'Hijack':
+      app = 'Audio Hijack Pro'
+    elif app == 'Earth':
+      app = 'Google Earth'
+    elif app == 'Capture':
+      app = 'Image Capture'
+    elif app == 'Maestro':
+      app = 'Keyboard Maestro'
+    elif app == 'Snitch':
+      app = 'Little Snitch Configuration'
+    elif app == 'Booth':
+      app = 'Photo Booth'
+    elif app == 'Time':
+      app = 'Time Machine'
+    elif app == 'Transporter':
+      app = 'Transporter Desktop'
+
 
 
     apps.append(app)
@@ -69,7 +92,7 @@ if cmd:
 
   f.close()
 
-  out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
+  subprocess.Popen(["osascript", f.name, "&"])
 
 else:
     sys.stderr.write("🚫  Nothing to do\n")
