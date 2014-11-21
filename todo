@@ -1,0 +1,64 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""
+Create a reminder from the command-line
+"""
+
+# tell application "Reminders"
+#  set newreminder to make new reminder
+#  set name of newreminder to "buh"
+#  set body of newreminder to "ok"
+# end tell
+
+import sys
+import os
+import getopt
+import tempfile
+import subprocess
+
+if __name__ != '__main__':
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+try:
+  opts, args = getopt.getopt(sys.argv[1:], 'vd')
+except getopt.GetoptError:
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+if not args:
+  args = []
+
+verbose = False
+
+for opt, arg in opts:
+  if opt == '-v':
+    verbose = True
+
+if len(args) == 0:
+  args.append('')
+
+cmd = ''
+
+for arg in args:
+
+  cmd += "  set r to make new reminder\n  set name of r to \"" + arg + "\"\n"
+
+if cmd:
+  cmd = "tell application \"Reminders\"\n" + cmd + "end tell\n" 
+  f = tempfile.NamedTemporaryFile(delete=False)
+
+  f.write(cmd)
+
+  if verbose:
+    f.seek(0)
+    sys.stdout.write("🍎")
+    sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
+
+  f.close()
+
+  out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
+
+else:
+    sys.stderr.write("🚫  No files to Transmit\n")
