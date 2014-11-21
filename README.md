@@ -19,17 +19,17 @@ Send a file/folder to [Launchbar](http://www.obdev.at/products/launchbar/index.h
 
 ## app
 
-Open/activate a Mac application from the terminal
+Open/activate one ore more Mac applications from the terminal
 
 	> app mail preview
 
 … will open both Mail.app and Preview.app
 
-chrome → Google Chrome
+There are several shortcuts for applications with long names:
 
-qt | quicktime → Quicktime Player
-
-activity → Activity Monitor
+* chrome → Google Chrome
+* qt | quicktime → Quicktime Player
+* activity → Activity Monitor
 
 ### Disclaimer
 
