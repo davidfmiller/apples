@@ -72,7 +72,7 @@ if len(args):
       app = 'Time Machine'
     elif app == 'Transporter':
       app = 'Transporter Desktop'
-    elif app == 'prefs':
+    elif app == 'Prefs':
       app = 'System Preferences'
 
 
