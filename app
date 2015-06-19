@@ -72,7 +72,8 @@ if len(args):
       app = 'Time Machine'
     elif app == 'Transporter':
       app = 'Transporter Desktop'
-
+    elif app == 'prefs':
+      app = 'System Preferences'
 
 
     apps.append(app)
