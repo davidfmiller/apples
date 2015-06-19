@@ -27,9 +27,10 @@ Open/activate one ore more Mac applications from the terminal
 
 There are several shortcuts for applications with long names:
 
-* chrome → Google Chrome
-* qt | quicktime → Quicktime Player
-* activity → Activity Monitor
+* `chrome` → Google Chrome
+* `qt` | `quicktime` → Quicktime Player
+* `activity` → Activity Monitor
+* `prefs` → System Preferences
 
 ### Disclaimer
 
