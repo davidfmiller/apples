@@ -21,7 +21,7 @@ Open/activate a Mac application from the terminal
 
 … will open `Safari.app`, and
 
-	> app acorn ~/Desktop/DSCF2375.tif ~/Desktop/DSCF2381.tif
+    > app acorn ~/Desktop/DSCF2375.tif ~/Desktop/DSCF2381.tif
 
 ... will open the images in [`Acorn`](http://www.flyingmeat.com/acorn/) (assuming its installed), instead of the default application (most likely, `Preview`).
 
@@ -31,6 +31,14 @@ There are several shortcuts for applications with long names:
 * `qt` | `quicktime` → Quicktime Player
 * `activity` → Activity Monitor
 * `prefs` → System Preferences
+
+[View the source](https://github.com/davidfmiller/apples/blob/master/app) for a complete list
+
+## todo
+
+Create items in `Reminders.app` from the command-line
+
+    > todo "Pick up milk on the way home"
 
 
 ### Disclaimer
