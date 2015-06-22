@@ -4,18 +4,6 @@ Simple command-line scripts that wrap interaction with Mac applications.
 
 Pretty minimal right now but there's more to come.
 
-## transmit
-
-Access [Transmit](http://panic.com/transmit/)'s "[Dock Send](http://www.panic.com/blog/15-secrets-of-transmit/)" from the command-line:
-
-    > transmit ~/Documents/git/davidfmiller.github.com/index.html
-
-## launchbar
-
-Send files/folders to [Launchbar](http://www.obdev.at/products/launchbar/index.html) from the command-line:
-
-    > launchbar ~/Documents/git/davidfmiller.github.com/index.html
-
 ## tag
 
 Set files/folders' Finder tags from the command-line:
@@ -25,16 +13,22 @@ Set files/folders' Finder tags from the command-line:
 
 ## app
 
-Open/activate one ore more Mac applications from the terminal
+Easily open files from the Terminal in applications which _aren't_ the default editor associated with the filetype.
 
-    > app mail preview
+Open/activate a Mac application from the terminal
 
-… will open both Mail.app and Preview.app
+    > app safari
+
+… will open `Safari.app`, and
+
+	> app acorn ~/Desktop/DSCF2375.tif ~/Desktop/DSCF2381.tif
+
+... will open the images in [`Acorn`](http://www.flyingmeat.com/acorn/) (assuming its installed), instead of the default application (most likely, `Preview`).
 
 There are several shortcuts for applications with long names:
 
 * `chrome` → Google Chrome
-* `qt` | quicktime → Quicktime Player
+* `qt` | `quicktime` → Quicktime Player
 * `activity` → Activity Monitor
 * `prefs` → System Preferences
 

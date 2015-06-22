@@ -35,7 +35,7 @@ for opt, arg in opts:
 tag = 0
 
 if len(args) == 0:
-  sys.stderr.write("🚫  No tag specified");
+  sys.stderr.write("🚫  No tag specified\n");
   sys.exit(2)
 
 tag = args.pop(0);
@@ -44,9 +44,8 @@ tag = args.pop(0);
 if (tag in TAGS):
   tag = TAGS.index(tag)
 else:
-  sys.stderr.write("🚫  Invalid tag: " + tag);
+  sys.stderr.write("🚫  Invalid tag: " + tag + "\n");
   sys.exit(2)
-
 
 # use current directory if no file passed
 if len(args) == 0:
@@ -54,6 +53,7 @@ if len(args) == 0:
 
 cmd = ''
 
+# loop through all files
 for arg in args:
 
   path = os.path.join(os.getcwd(), arg)

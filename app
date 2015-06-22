@@ -36,64 +36,76 @@ for opt, arg in opts:
 apps = []
 cmd = ''
 
-if len(args):
-  for word in args:
-    app = " ".join([word[0].upper() + word[1:] for word in word.split()])
+app = None
 
-    if app == 'Coda':
-      app = 'Coda 2'
-    elif app == 'Activity':
-      app = 'Activity Monitor'
-    elif app == 'Notational':
-      app = 'Notational Velocity'
-    elif app == 'Qt' or app == 'Quicktime':
-      app = 'Quicktime Player'
-    elif app == 'Chrome':
-      app = 'Google Chrome'
-    elif app == 'Mission':
-      app = 'Mission Control'
-    elif app == 'Preferences':
-      app = 'System Preferences'
-    elif app == 'Store':
-      app = 'App Store'
-    elif app == 'Hijack':
-      app = 'Audio Hijack Pro'
-    elif app == 'Earth':
-      app = 'Google Earth'
-    elif app == 'Capture':
-      app = 'Image Capture'
-    elif app == 'Maestro':
-      app = 'Keyboard Maestro'
-    elif app == 'Snitch':
-      app = 'Little Snitch Configuration'
-    elif app == 'Booth':
-      app = 'Photo Booth'
-    elif app == 'Time':
-      app = 'Time Machine'
-    elif app == 'Transporter':
-      app = 'Transporter Desktop'
-    elif app == 'Prefs':
-      app = 'System Preferences'
+if len(args) == 0:
+  sys.stderr.write("🚫  No app specified\n");
+  sys.exit(2)
+
+app = args.pop(0);
+
+#app = " ".join([word[0].upper() + word[1:] for word in word.split()])
+
+if app == 'Coda':
+  app = 'Coda 2'
+elif app == 'Activity':
+  app = 'Activity Monitor'
+elif app == 'Notational':
+  app = 'Notational Velocity'
+elif app == 'Qt' or app == 'Quicktime':
+  app = 'Quicktime Player'
+elif app == 'Chrome':
+  app = 'Google Chrome'
+elif app == 'Mission':
+  app = 'Mission Control'
+elif app == 'Preferences':
+  app = 'System Preferences'
+elif app == 'Store':
+  app = 'App Store'
+elif app == 'Hijack':
+  app = 'Audio Hijack Pro'
+elif app == 'Earth':
+  app = 'Google Earth'
+elif app == 'Capture':
+  app = 'Image Capture'
+elif app == 'Maestro':
+  app = 'Keyboard Maestro'
+elif app == 'Snitch':
+  app = 'Little Snitch Configuration'
+elif app == 'Booth':
+  app = 'Photo Booth'
+elif app == 'Time':
+  app = 'Time Machine'
+elif app == 'Transporter':
+  app = 'Transporter Desktop'
+elif app == 'Prefs':
+  app = 'System Preferences'
+elif app == 'Fantastical':
+  app = 'Fantastical 2'
 
 
-    apps.append(app)
+# loop through all files
+for arg in args:
 
-for a in apps:
-  cmd += "tell application \"" + a + "\"\n  activate \nend tell\n" 
+  path = os.path.join(os.getcwd(), arg)
 
-if cmd:
-  f = tempfile.NamedTemporaryFile(delete=False)
+  if not os.path.exists(path):
+    sys.stderr.write("📄  " + path + " does not exist\n")
+    continue
 
-  f.write(cmd)
+  cmd += "  set f to POSIX file \"" + path + "\"\n  open f" + "\n"
 
-  if verbose:
-    f.seek(0)
-    sys.stdout.write("🍎")
-    sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
 
-  f.close()
+cmd = "tell application \"" + app + "\"\n" + cmd + "  activate\nend tell\n" 
+f = tempfile.NamedTemporaryFile(delete=False)
 
-  subprocess.Popen(["osascript", f.name, "&"])
+f.write(cmd)
 
-else:
-    sys.stderr.write("🚫  Nothing to do\n")
+if verbose:
+  f.seek(0)
+  sys.stdout.write("🍎")
+  sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
+
+f.close()
+
+out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
