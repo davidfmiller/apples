@@ -44,7 +44,7 @@ if len(args) == 0:
 
 app = args.pop(0);
 
-#app = " ".join([word[0].upper() + word[1:] for word in word.split()])
+app = app[0].upper() + app[1:]
 
 if app == 'Coda':
   app = 'Coda 2'
@@ -96,7 +96,7 @@ for arg in args:
   cmd += "  set f to POSIX file \"" + path + "\"\n  open f" + "\n"
 
 
-cmd = "tell application \"" + app + "\"\n" + cmd + "  activate\nend tell\n" 
+cmd = "tell application \"" + app + "\"\n" + cmd + "  activate\nend tell\n"
 f = tempfile.NamedTemporaryFile(delete=False)
 
 f.write(cmd)
