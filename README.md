@@ -2,7 +2,7 @@
 
 Simple command-line scripts that wrap interaction with Mac applications.
 
-Pretty minimal right now but there are more to come!
+Pretty minimal right now but there's more to come.
 
 ## transmit
 
@@ -12,10 +12,16 @@ Access [Transmit](http://panic.com/transmit/)'s "[Dock Send](http://www.panic.co
 
 ## launchbar
 
-Send a file/folder to [Launchbar](http://www.obdev.at/products/launchbar/index.html) from the command-line:
+Send files/folders to [Launchbar](http://www.obdev.at/products/launchbar/index.html) from the command-line:
 
 	> launchbar ~/Documents/git/davidfmiller.github.com/index.html
 
+## tag
+
+Set files/folders' Finder tags from the command-line:
+
+	> tag red ~/Desktop/image.tiff ~/Documents/tmp.txt # add red tag
+	> tag none ~/Desktop/doc.rtf                       # remove a tag
 
 ## app
 
