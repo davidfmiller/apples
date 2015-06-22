@@ -36,17 +36,13 @@ for opt, arg in opts:
   if opt == '-v':
     verbose = True
 
-if len(args) == 0:
-  args.append('')
-
 cmd = ''
 
 for arg in args:
-
   cmd += "  set r to make new reminder\n  set name of r to \"" + arg + "\"\n"
 
-if cmd:
-  cmd = "tell application \"Reminders\"\n" + cmd + "end tell\n" 
+if len(args):
+  cmd = "tell application \"Reminders\"\n" + cmd + "end tell\n"
   f = tempfile.NamedTemporaryFile(delete=False)
 
   f.write(cmd)
@@ -61,4 +57,4 @@ if cmd:
   out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
 
 else:
-    sys.stderr.write("🚫  No files to Transmit\n")
+    sys.stderr.write("🚫  Nothing to do\n")
