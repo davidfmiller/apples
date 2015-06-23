@@ -9,7 +9,9 @@ Create a reminder from the command-line
 #  set newreminder to make new reminder
 #  set name of newreminder to "buh"
 #  set body of newreminder to "ok"
-#	 set due date of r to date "12/25/04" 
+#  set due date of r to date "12/25/04" 
+#  set remind me date of r to date "12/24/14"
+#  set priority of r to 0
 # end tell
 
 import sys
@@ -45,6 +47,7 @@ if not args:
   args = []
 
 due = None
+priority = None
 verbose = False
 
 for opt, arg in opts:
@@ -56,7 +59,16 @@ for opt, arg in opts:
 cmd = ''
 
 for arg in args:
-  cmd += "  set r to make new reminder\n  set name of r to \"" + esc(arg) + "\"\n" + (due and 'set due date of r to date "' + due + "\"\n" or '')
+  cmd += "  set r to make new reminder\n"
+  cmd += "  set name of r to \"" + esc(arg) + "\"\n"
+
+  if due:
+     cmd += "  set due date of r to date \"" + due + "\"\n"
+
+  if priority:
+     cmd += "  set priority of r to 1\n"
+
+
 
 if len(args):
   cmd = "tell application \"Reminders\"\n" + cmd + "end tell\n"
