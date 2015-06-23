@@ -9,6 +9,7 @@ Create a reminder from the command-line
 #  set newreminder to make new reminder
 #  set name of newreminder to "buh"
 #  set body of newreminder to "ok"
+#	 set due date of r to date "12/25/04" 
 # end tell
 
 import sys
@@ -17,12 +18,25 @@ import getopt
 import tempfile
 import subprocess
 
+def esc(arg):
+
+  buf = ''
+  for i in arg:
+    if (i == '\\'):
+      buf += '\\\\'
+    elif (i == '"'):
+      buf += '\\"'
+    else:
+      buf += i
+
+  return buf
+
 if __name__ != '__main__':
   sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:], 'vd')
+  opts, args = getopt.getopt(sys.argv[1:], 'vd:')
 except getopt.GetoptError:
   sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
@@ -30,16 +44,19 @@ except getopt.GetoptError:
 if not args:
   args = []
 
+due = None
 verbose = False
 
 for opt, arg in opts:
   if opt == '-v':
     verbose = True
+  if opt == '-d':
+    due = arg
 
 cmd = ''
 
 for arg in args:
-  cmd += "  set r to make new reminder\n  set name of r to \"" + arg + "\"\n"
+  cmd += "  set r to make new reminder\n  set name of r to \"" + esc(arg) + "\"\n" + (due and 'set due date of r to date "' + due + "\"\n" or '')
 
 if len(args):
   cmd = "tell application \"Reminders\"\n" + cmd + "end tell\n"
@@ -57,4 +74,4 @@ if len(args):
   out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
 
 else:
-    sys.stderr.write("🚫  Nothing to do\n")
+  sys.stderr.write("🚫  Nothing to do\n")
