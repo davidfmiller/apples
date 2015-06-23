@@ -31,6 +31,7 @@ There are several shortcuts for applications with long names:
 * `qt` | `quicktime` → Quicktime Player
 * `activity` → Activity Monitor
 * `prefs` → System Preferences
+* etc...
 
 [View the source](https://github.com/davidfmiller/apples/blob/master/app) for a complete list
 
@@ -39,6 +40,12 @@ There are several shortcuts for applications with long names:
 Create items in `Reminders.app` from the command-line
 
     > todo "Pick up milk on the way home"
+
+## note
+
+Create items in `Notes.app` from the command-line
+
+    > cat foo.txt > note "Contents of foo.txt"
 
 
 ### Disclaimer

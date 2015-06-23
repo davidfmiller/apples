@@ -24,6 +24,9 @@ import os
 import getopt
 import tempfile
 import subprocess
+import datetime
+
+# https://docs.python.org/2/library/locale.html#locale.D_FMT
 
 def esc(arg):
 
@@ -51,6 +54,10 @@ except getopt.GetoptError:
 if not args:
   args = []
 
+TODAY = ['today']
+TOMORROW = ['tomorrow']
+
+
 due = None
 priority = None
 verbose = False
@@ -72,11 +79,15 @@ for arg in args:
   cmd += "  set name of r to \"" + esc(arg) + "\"\n"
 
   if due:
-     cmd += "  set due date of r to date \"" + due + "\"\n"
+    if due in TODAY:
+      print "today!!!"
+    elif due in TODAY:
+      print "tomorrow!!!"
+    else:
+      cmd += "  set due date of r to date \"" + str(due) + "\"\n"
 
   if priority:
-     cmd += "  set priority of r to 1\n"
-
+    cmd += "  set priority of r to 1\n"
 
 if len(args):
   cmd = "tell application \"Reminders\"\n" + cmd + "end tell\n"

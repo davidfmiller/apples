@@ -17,6 +17,12 @@ import subprocess
 
 
 def esc(arg):
+  """
+  Escapes a string's characters
+
+  @param arg (string)
+  @return string
+  """
 
   buf = ''
   for i in arg:
