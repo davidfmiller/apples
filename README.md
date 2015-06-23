@@ -45,7 +45,7 @@ Create items in `Reminders.app` from the command-line
 
 Create items in `Notes.app` from the command-line
 
-    > cat foo.txt > note "Contents of foo.txt"
+    > cat foo.txt | note "Contents of foo.txt"
 
 
 ### Disclaimer
