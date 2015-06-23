@@ -28,6 +28,10 @@ def esc(arg):
       buf += '\\"'
     elif (i == ' '):
       buf += '&nbsp;'
+    elif (i == '>'):
+      buf += '&gt;'
+    elif (i == '<'):
+      buf += '&lt;'
     else:
       buf += i
 
