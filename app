@@ -46,24 +46,22 @@ app = args.pop(0);
 
 app = app[0].upper() + app[1:]
 
-if app == 'Coda':
-  app = 'Coda 2'
-elif app == 'Activity':
+if app == 'Activity':
   app = 'Activity Monitor'
-elif app == 'Notational':
-  app = 'Notational Velocity'
-elif app == 'Qt' or app == 'Quicktime':
-  app = 'Quicktime Player'
-elif app == 'Chrome':
-  app = 'Google Chrome'
-elif app == 'Mission':
-  app = 'Mission Control'
-elif app == 'Preferences':
-  app = 'System Preferences'
 elif app == 'Store':
   app = 'App Store'
 elif app == 'Hijack':
   app = 'Audio Hijack Pro'
+elif app == 'Coda':
+  app = 'Coda 2'
+elif app == 'Chrome':
+  app = 'Google Chrome'
+elif app == 'Mission':
+  app = 'Mission Control'
+elif app == 'Fantastical':
+  app = 'Fantastical 2'
+if app == 'Gh':
+  app = 'Github'
 elif app == 'Earth':
   app = 'Google Earth'
 elif app == 'Capture':
@@ -72,16 +70,18 @@ elif app == 'Maestro':
   app = 'Keyboard Maestro'
 elif app == 'Snitch':
   app = 'Little Snitch Configuration'
+elif app == 'Notational':
+  app = 'Notational Velocity'
 elif app == 'Booth':
   app = 'Photo Booth'
+elif app == 'Qt' or app == 'Quicktime':
+  app = 'Quicktime Player'
+elif app == 'Prefs' or app == 'Preferences':
+  app = 'System Preferences'
 elif app == 'Time':
   app = 'Time Machine'
 elif app == 'Transporter':
   app = 'Transporter Desktop'
-elif app == 'Prefs':
-  app = 'System Preferences'
-elif app == 'Fantastical':
-  app = 'Fantastical 2'
 
 
 # loop through all files

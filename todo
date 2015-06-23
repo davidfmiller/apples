@@ -3,13 +3,18 @@
 
 """
 Create a reminder from the command-line
+
+> todo "thing"
+> todo "thing" -p                # add priority
+> todo "thing" -p -d "12/25/15"  # add priority
+
 """
 
 # tell application "Reminders"
 #  set newreminder to make new reminder
 #  set name of newreminder to "buh"
 #  set body of newreminder to "ok"
-#  set due date of r to date "12/25/04" 
+#  set due date of r to date "12/25/04"
 #  set remind me date of r to date "12/24/14"
 #  set priority of r to 0
 # end tell
@@ -38,7 +43,7 @@ if __name__ != '__main__':
   sys.exit(2)
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:], 'vd:')
+  opts, args = getopt.getopt(sys.argv[1:], 'vpd:')
 except getopt.GetoptError:
   sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
@@ -55,10 +60,14 @@ for opt, arg in opts:
     verbose = True
   if opt == '-d':
     due = arg
+  if opt == '-p':
+    priority = True
+
 
 cmd = ''
 
 for arg in args:
+
   cmd += "  set r to make new reminder\n"
   cmd += "  set name of r to \"" + esc(arg) + "\"\n"
 
@@ -67,7 +76,6 @@ for arg in args:
 
   if priority:
      cmd += "  set priority of r to 1\n"
-
 
 
 if len(args):
