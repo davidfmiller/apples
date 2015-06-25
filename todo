@@ -28,6 +28,7 @@ import datetime
 
 # https://docs.python.org/2/library/locale.html#locale.D_FMT
 
+
 def esc(arg):
 
   buf = ''
@@ -60,6 +61,7 @@ TODAY = ['today']
 TOMORROW = ['tomorrow']
 
 
+body = ''
 due = None
 priority = None
 verbose = False
@@ -73,6 +75,11 @@ for opt, arg in opts:
     priority = True
 
 
+if not sys.stdin.isatty():
+  for line in sys.stdin:
+    body += line
+
+
 cmd = ''
 
 for arg in args:
@@ -82,14 +89,14 @@ for arg in args:
 
   if due:
     if due in TODAY:
-      print "today!!!"
-    elif due in TODAY:
-      print "tomorrow!!!"
       cmd += "  set due date of r to current date\n"
     elif due in TOMORROW:
       cmd += "  set tomorrow to (current date) + (24 * 60 * 60)\n  set due date of r to date (date string of tomorrow)\n"
     else:
       cmd += "  set due date of r to date \"" + str(due) + "\"\n"
+
+  if body:
+    cmd += " set body of r to \"" + esc(body) + "\"\n" 
 
   if priority:
     cmd += "  set priority of r to 1\n"
