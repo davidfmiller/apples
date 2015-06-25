@@ -36,6 +36,8 @@ def esc(arg):
       buf += '\\\\'
     elif (i == '"'):
       buf += '\\"'
+    elif (i == '\n'):
+      buf += '\\n'
     else:
       buf += i
 
@@ -83,6 +85,9 @@ for arg in args:
       print "today!!!"
     elif due in TODAY:
       print "tomorrow!!!"
+      cmd += "  set due date of r to current date\n"
+    elif due in TOMORROW:
+      cmd += "  set tomorrow to (current date) + (24 * 60 * 60)\n  set due date of r to date (date string of tomorrow)\n"
     else:
       cmd += "  set due date of r to date \"" + str(due) + "\"\n"
 
