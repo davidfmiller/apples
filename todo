@@ -5,8 +5,11 @@
 Create a reminder from the command-line
 
 > todo "thing"
-> todo "thing" -p                # add priority
-> todo "thing" -p -d "12/25/15"  # add priority
+> todo -p "thing"                 # add priority
+> todo -p -d "12/25/15" "thing"   # add priority and due date of Christmas Day 2015
+> todo -p -d today "thing"        # add priority and due date of today
+> todo -p -d tomorrow "thing"     # add priority and due date of tomorrow
+> cat foo.txt | todo "hi"         # create a note whose body is the contents of foo.txt
 
 """
 
@@ -25,8 +28,6 @@ import getopt
 import tempfile
 import subprocess
 import datetime
-
-# https://docs.python.org/2/library/locale.html#locale.D_FMT
 
 
 def esc(arg):
