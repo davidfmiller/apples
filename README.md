@@ -41,6 +41,12 @@ Create items in `Reminders.app` from the command-line
 
     > todo "Pick up milk on the way home"
 
+## title
+
+Set the custom title of the active `Terminal.app` window
+
+    > title "git"
+
 ## volume
 
 Set the system volume from the command-line
