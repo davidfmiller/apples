@@ -2,11 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Set the system volume from the command-line
+Set the custom title of the active Terminal window
 
-> volume 0
-> volume 100
-> volume mute
+> title "git"
 
 """
 
@@ -18,6 +16,20 @@ import getopt
 import tempfile
 import subprocess
 
+def esc(arg):
+
+  buf = ''
+  for i in arg:
+    if (i == '\\'):
+      buf += '\\\\'
+    elif (i == '"'):
+      buf += '\\"'
+    elif (i == '\n'):
+      buf += '\\n'
+    else:
+      buf += i
+
+  return buf
 
 if __name__ != '__main__':
   sys.stderr.write("🚫  Incorrect usage\n")
@@ -29,7 +41,6 @@ except getopt.GetoptError:
   sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
 
-level = 0
 verbose = False
 
 for opt, arg in opts:
@@ -37,7 +48,7 @@ for opt, arg in opts:
     verbose = True
 
 if len(args) == 0:
-  sys.stderr.write("🚫  No volume provided (0-100)\n")
+  sys.stderr.write("🚫  No title provided\n")
   sys.exit(2)
 elif len(args) > 1:
   sys.stderr.write("🚫  Incorrect usage\n")
@@ -47,18 +58,9 @@ cmd = ''
 
 arg = args[0].lower()
 
-if arg == 'mute':
-  arg = 0
-elif arg == 'max':
-  arg = 100
-else:
-  try:
-    arg = int(arg)
-  except ValueError:
-    sys.stderr.write("🚫  Invalid volume (0-100)\n")
-    sys.exit(2)
+arg = esc(arg)
 
-cmd += "  set volume output volume " + str(arg) + "\n"
+cmd = "tell application \"Terminal\"\n  set custom title of window 1 to \"" + esc(arg) + "\"\n end tell\n"
 
 f = tempfile.NamedTemporaryFile(delete=False)
 f.write(cmd)
