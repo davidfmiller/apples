@@ -41,6 +41,16 @@ Create items in `Reminders.app` from the command-line
 
     > todo "Pick up milk on the way home"
 
+## volume
+
+Set the system volume from the command-line
+
+    > volume 0
+    > volume mute # same as 0
+    > volume 100
+    > volume max # same as 100
+    > volume 50
+
 ## note
 
 Create items in `Notes.app` from the command-line
