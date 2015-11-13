@@ -1,0 +1,73 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""
+Set the system volume from the command-line
+
+> volume 0
+> volume 100
+> volume mute
+
+"""
+
+# set volume output volume 100
+
+import sys
+import os
+import getopt
+import tempfile
+import subprocess
+
+
+if __name__ != '__main__':
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+try:
+  opts, args = getopt.getopt(sys.argv[1:], 'v')
+except getopt.GetoptError:
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+level = 0
+verbose = False
+
+for opt, arg in opts:
+  if opt == '-v':
+    verbose = True
+
+if len(args) == 0:
+  sys.stderr.write("🚫  No volume provided (0-100)\n")
+  sys.exit(2)
+elif len(args) > 1:
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+cmd = ''
+
+arg = args[0].lower()
+
+if arg == 'mute':
+  arg = 0
+elif arg == 'max':
+  arg = 100
+else:
+  try:
+    arg = int(arg)
+  except ValueError:
+    sys.stderr.write("🚫  Invalid volume (0-100)\n")
+    sys.exit(2)
+
+cmd += "  set volume output volume " + str(arg) + "\n"
+
+f = tempfile.NamedTemporaryFile(delete=False)
+f.write(cmd)
+
+if verbose:
+  f.seek(0)
+  sys.stdout.write("🍎")
+  sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
+
+f.close()
+
+out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()

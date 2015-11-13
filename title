@@ -1,0 +1,75 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""
+Set the custom title of the active Terminal window
+
+> title "git"
+
+"""
+
+# set volume output volume 100
+
+import sys
+import os
+import getopt
+import tempfile
+import subprocess
+
+def esc(arg):
+
+  buf = ''
+  for i in arg:
+    if (i == '\\'):
+      buf += '\\\\'
+    elif (i == '"'):
+      buf += '\\"'
+    elif (i == '\n'):
+      buf += '\\n'
+    else:
+      buf += i
+
+  return buf
+
+if __name__ != '__main__':
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+try:
+  opts, args = getopt.getopt(sys.argv[1:], 'v')
+except getopt.GetoptError:
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+verbose = False
+
+for opt, arg in opts:
+  if opt == '-v':
+    verbose = True
+
+if len(args) == 0:
+  sys.stderr.write("🚫  No title provided\n")
+  sys.exit(2)
+elif len(args) > 1:
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+cmd = ''
+
+arg = args[0].lower()
+
+arg = esc(arg)
+
+cmd = "tell application \"Terminal\"\n  set custom title of window 1 to \"" + esc(arg) + "\"\n end tell\n"
+
+f = tempfile.NamedTemporaryFile(delete=False)
+f.write(cmd)
+
+if verbose:
+  f.seek(0)
+  sys.stdout.write("🍎")
+  sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
+
+f.close()
+
+out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
