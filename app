@@ -52,6 +52,8 @@ elif app == 'Store':
   app = 'App Store'
 elif app == 'Hijack':
   app = 'Audio Hijack Pro'
+elif app == 'Bb':
+  app = 'BBEdit'
 elif app == 'Coda':
   app = 'Coda 2'
 elif app == 'Chrome':
