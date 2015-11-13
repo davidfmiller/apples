@@ -1,0 +1,110 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""
+Display a notification
+
+http://www.cooperative-fruitiere.com/notifications/index_en.html
+"""
+
+import sys
+import os
+import getopt
+import tempfile
+import subprocess
+
+def esc(arg):
+  """
+  Escapes a string's characters
+
+  @param arg (string)
+  @return string
+  """
+
+  buf = ''
+  for i in arg:
+    if (i == '\\'):
+      buf += '\\\\'
+    elif (i == '\n'):
+      buf += '<br/>'
+    elif (i == '"'):
+      buf += '\\"'
+    elif (i == ' '):
+      buf += '&nbsp;'
+    elif (i == '>'):
+      buf += '&gt;'
+    elif (i == '<'):
+      buf += '&lt;'
+    else:
+      buf += i
+
+  return buf
+
+
+
+if __name__ != '__main__':
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+try:
+  opts, args = getopt.getopt(sys.argv[1:], 'v', ['title=', 'message=', 'subtitle='])
+except getopt.GetoptError:
+  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.exit(2)
+
+
+verbose = False
+title = ""
+message = ""
+subtitle = ""
+
+for opt, arg in opts:
+
+  if opt == '-v':
+    verbose = True
+  elif opt == '--title':
+    title = arg
+  elif opt == '--message':
+    message = arg
+  elif opt == '--subtitle':
+    subtitle = arg
+
+if title == "" and message == "" and subtitle == "":
+  sys.stderr.write("🚫  No notification specified\n");
+  sys.exit(2)
+
+cmd = """
+set notificationScripting to true
+try
+	tell application "Finder"
+		name of application file id "com.cooperative-fruitiere.notifications"
+	end tell
+on error err_msg number err_num
+	set notificationScripting to false
+end try
+
+if notificationScripting then
+	tell application "Notifications Scripting"
+		display notification "%s" subtitle "%s" message "%s"
+	end tell
+else
+	display notification "%s" with title "%s" subtitle "%s"
+end if
+  """ % (esc(title), esc(subtitle), esc(message), esc(message), esc(title), esc(subtitle))
+
+if cmd:
+  f = tempfile.NamedTemporaryFile(delete=False)
+
+  f.write(cmd)
+
+  if verbose:
+    f.seek(0)
+    sys.stdout.write("🍎")
+    sys.stdout.write("  " + f.read().replace("\n", "\n   ").rstrip() + "\n")
+
+  f.close()
+
+  out,err = subprocess.Popen(["osascript", f.name], stdout=subprocess.PIPE).communicate()
+
+else:
+    sys.stderr.write("🚫  No files to tag\n")
