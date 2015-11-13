@@ -63,6 +63,14 @@ Create items in `Notes.app` from the command-line
 
     > cat foo.txt | note "Contents of foo.txt"
 
+## notify
+
+Display a notification 
+
+    > notify --title "Title" --message "Message" --subtitle "Subtitle"
+
+(Will use [Scripting Notificaitons](http://www.cooperative-fruitiere.com/notifications/index_en.html) if installed.)
+
 
 ### Disclaimer
 
