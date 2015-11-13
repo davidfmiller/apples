@@ -55,7 +55,6 @@ except getopt.GetoptError:
 
 verbose = False
 title = ""
-message = ""
 subtitle = ""
 
 for opt, arg in opts:
@@ -64,8 +63,6 @@ for opt, arg in opts:
     verbose = True
   elif opt == '--title':
     title = arg
-  elif opt == '--message':
-    message = arg
   elif opt == '--subtitle':
     subtitle = arg
 
@@ -74,23 +71,22 @@ if title == "" and message == "" and subtitle == "":
   sys.exit(2)
 
 cmd = """
-set notificationScripting to true
+set notificationScripting to false
 try
-	tell application "Finder"
-		name of application file id "com.cooperative-fruitiere.notifications"
-	end tell
-on error err_msg number err_num
-	set notificationScripting to false
+	do shell script "osascript -e 'tell application \\"Finder\\" to return name of application file id \\"com.cooperative-fruitiere.notifications\\"'"
+	set notificationScripting to true
 end try
 
 if notificationScripting then
-	tell application "Notifications Scripting"
-		display notification "%s" subtitle "%s" message "%s"
-	end tell
+	using terms from application "Notifications Scripting"
+		tell application "Notifications Scripting"
+			display notification "%s" subtitle "%s"
+		end tell
+	end using terms from
 else
-	display notification "%s" with title "%s" subtitle "%s"
+	display notification "" with title "%s" subtitle "%s"
 end if
-  """ % (esc(title), esc(subtitle), esc(message), esc(message), esc(title), esc(subtitle))
+  """ % (esc(title), esc(subtitle), esc(title), esc(subtitle))
 
 if cmd:
   f = tempfile.NamedTemporaryFile(delete=False)
