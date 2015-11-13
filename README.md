@@ -65,9 +65,9 @@ Create items in `Notes.app` from the command-line
 
 ## notify
 
-Display a notification 
+Display a notification
 
-    > notify --title "Title" --message "Message" --subtitle "Subtitle"
+    > notify --title "Title" --subtitle "Subtitle"
 
 (Will use [Scripting Notificaitons](http://www.cooperative-fruitiere.com/notifications/index_en.html) if installed.)
 
