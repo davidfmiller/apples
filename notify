@@ -47,7 +47,7 @@ if __name__ != '__main__':
   sys.exit(2)
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:], 'v', ['title=', 'message=', 'subtitle='])
+  opts, args = getopt.getopt(sys.argv[1:], 'v', ['help', 'title=', 'message=', 'subtitle='])
 except getopt.GetoptError:
   sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
@@ -59,12 +59,22 @@ subtitle = ""
 
 for opt, arg in opts:
 
+  if opt == '--help':
+    sys.stdout.write("""🏥   notify --title "title" [--subtitle ""]
+🌏   https://github.com/davidfmiller/apples/#notify
+
+    Display an OS X notification via command-line
+""")
+    sys.exit()
+
+
   if opt == '-v':
     verbose = True
   elif opt == '--title':
     title = arg
   elif opt == '--subtitle':
     subtitle = arg
+
 
 if title == "" and message == "" and subtitle == "":
   sys.stderr.write("🚫  No notification specified\n");
