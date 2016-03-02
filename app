@@ -16,7 +16,7 @@ if __name__ != '__main__':
   sys.exit(2)
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:], 'v', ['verbose'])
+  opts, args = getopt.getopt(sys.argv[1:], 'vq', ['verbose', 'quit'])
 except getopt.GetoptError:
   sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
@@ -27,11 +27,17 @@ if not args:
 script = ""
 activate = False
 verbose = False
+quit = False
+
 
 for opt, arg in opts:
 
   if opt == '-v' or opt == '--verbose':
     verbose = True
+
+  elif opt == '-q' or opt == '--quit':
+    quit = True
+
 
 apps = []
 cmd = ''
@@ -85,17 +91,19 @@ elif app == 'Time':
 elif app == 'Transporter':
   app = 'Transporter Desktop'
 
+if quit:
+  cmd = 'quit'
+else:
+  # loop through all files
+  for arg in args:
 
-# loop through all files
-for arg in args:
+    path = os.path.join(os.getcwd(), arg)
 
-  path = os.path.join(os.getcwd(), arg)
+    if not os.path.exists(path):
+      sys.stderr.write("📄  " + path + " does not exist\n")
+      continue
 
-  if not os.path.exists(path):
-    sys.stderr.write("📄  " + path + " does not exist\n")
-    continue
-
-  cmd += "  set f to POSIX file \"" + path + "\"\n  open f" + "\n"
+    cmd += "  set f to POSIX file \"" + path + "\"\n  open f" + "\n"
 
 
 cmd = "tell application \"" + app + "\"\n" + cmd + "  activate\nend tell\n"
