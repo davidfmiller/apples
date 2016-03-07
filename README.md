@@ -72,6 +72,15 @@ Display a notification
 (Will use [Scripting Notificaitons](http://www.cooperative-fruitiere.com/notifications/index_en.html) if installed.)
 
 
+## beep
+
+Plays the default OS X system beep sound (or another system sound if provided)
+
+    > beep [basso|blowfrog|funk|glass|hero|morse|ping|pop|purr|sosumi|submarine|tink]
+
+
+
 ### Disclaimer
+
 
 All trademarks & copyrights remain the property of their respective owners.
