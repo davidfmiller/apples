@@ -69,7 +69,7 @@ Display a notification
 
     > notify --title "Title" --subtitle "Subtitle"
 
-(Will use [Scripting Notificaitons](http://www.cooperative-fruitiere.com/notifications/index_en.html) if installed.)
+(Will use [Scripting Notifications](http://www.cooperative-fruitiere.com/notifications/index_en.html) if installed.)
 
 
 ## beep
