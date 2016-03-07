@@ -1,0 +1,11 @@
+#!/usr/bin/swift
+
+import Cocoa
+
+//let sound : NSSound = NSSound()
+//sound.play()
+
+NSBeep()
+
+let future : NSDate = NSDate(timeIntervalSinceNow:0.2)
+NSThread.sleepUntilDate(future);
