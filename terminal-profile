@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-Set the background color of a Terminal.app window via command-line
+Modify the settings profile of the active Terminal.app window via command-line
 """
 
 # tell application "Terminal"
 #   try
-#     set current settings of selected tab of window 1 to (settings set "???")
+#     set current settings of selected tab of window 1 to (settings set "Pro")
 #   on error
 #     beep
 #   end try
@@ -19,35 +19,6 @@ import getopt
 import tempfile
 import subprocess
 
-
-def esc(arg):
-  """
-  Escapes a string's characters
-
-  @param arg (string)
-  @return string
-  """
-
-  buf = ''
-  for i in arg:
-    if (i == '\\'):
-      buf += '\\\\'
-    elif (i == '\n'):
-      buf += '<br/>'
-    elif (i == '"'):
-      buf += '\\"'
-    elif (i == ' '):
-      buf += '&nbsp;'
-    elif (i == '>'):
-      buf += '&gt;'
-    elif (i == '<'):
-      buf += '&lt;'
-    else:
-      buf += i
-
-  return buf
-
-
 if __name__ != '__main__':
   sys.stderr.write("🚫  Incorrect usage\n")
   sys.exit(2)
@@ -55,7 +26,7 @@ if __name__ != '__main__':
 try:
   opts, args = getopt.getopt(sys.argv[1:], 'v')
 except getopt.GetoptError:
-  sys.stderr.write("🚫  Incorrect usage\n")
+  sys.stderr.write("🚫  Incorrect usage: > terminal-profile {profile} \n")
   sys.exit(2)
 
 verbose = False
@@ -67,6 +38,8 @@ for opt, arg in opts:
 if len(args) > 1:
   sys.stderr.write("🚫  Invalid Terminal setting specified: " + str(args) + "\n")
   sys.exit(2)
+
+# if no profile specified use "Pro"
 elif len(args) == 0:
   args = ["Pro"]
 
