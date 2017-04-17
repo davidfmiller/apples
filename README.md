@@ -35,6 +35,14 @@ There are several shortcuts for applications with long names:
 
 [View the source](https://github.com/davidfmiller/apples/blob/master/app) for a complete list
 
+## terminal-profile
+
+Change the profile settings in the active Terminal window:
+
+    > terminal-profile Pro
+
+[Read more](https://readmeansrun.com/blog/terminal/applescript/2017/04/15/terminal-app-profiles.html)
+
 ## todo
 
 Create items in `Reminders.app` from the command-line
