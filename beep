@@ -4,7 +4,7 @@ import Darwin
 import Cocoa
 import Foundation
 
-let stderr = NSFileHandle.fileHandleWithStandardError()
+let stderr = FileHandle.standardError
 
 var target = "basso" // default
 
@@ -25,27 +25,27 @@ let SOUNDS : [String : Double] = [
     "tink" : 0.1
 ]
 
-if Process.arguments.count == 2
+if CommandLine.arguments.count == 2
 {
-    target = Process.arguments[1]
+    target = CommandLine.arguments[1]
 }
-else if Process.arguments.count > 2
+else if CommandLine.arguments.count > 2
 {
-    stderr.writeData("🚫  Invalid usage\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+    stderr.write("🚫  Invalid usage\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
     exit(0)
 }
 
 if SOUNDS[target] == nil
 {
-    stderr.writeData("🚫  No beep named \"\(target)\"\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+    stderr.write("🚫  No beep named \"\(target)\"\n".data(using: String.Encoding.utf8, allowLossyConversion: false)!)
     exit(0)
 }
 
-let url : NSURL? = NSURL(string: "file:///System/Library/Sounds/\(target.capitalizedString).aiff")
+let url : URL? = URL(string: "file:///System/Library/Sounds/\((target as NSString).capitalized).aiff")
 
-let sound : NSSound! = NSSound(contentsOfURL: url!, byReference: false)
+let sound : NSSound! = NSSound(contentsOf: url!, byReference: false)
 sound.play()
 
 // pause script to ensure entire duration of sound is played
-let future : NSDate = NSDate(timeIntervalSinceNow: SOUNDS[target]!)
-NSThread.sleepUntilDate(future);
+let future : Date = Date(timeIntervalSinceNow: SOUNDS[target]!)
+Thread.sleep(until: future);
