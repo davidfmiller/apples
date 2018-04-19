@@ -72,6 +72,8 @@ if app == 'Gh':
   app = 'Github'
 elif app == 'Earth':
   app = 'Google Earth'
+elif app == 'Hexfiend':
+  app = 'Hex Fiend'
 elif app == 'Capture':
   app = 'Image Capture'
 elif app == 'Maestro':
