@@ -9,6 +9,5 @@ let stdout = FileHandle.standardOutput
 if let screen = NSScreen.main {
   let rect = screen.visibleFrame
 
-  stdout.write("🖥  \(Int(rect.size.width)) × \(Int(rect.size.height))\n".data(using: String.Encoding.utf8)!)
-
+  stdout.write("🖥  \(Int(rect.size.width)) × \(Int(rect.size.height)) (\(String(format:"%0.3f", rect.size.width / rect.size.height)))\n".data(using: String.Encoding.utf8)!)
 }
