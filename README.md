@@ -43,11 +43,13 @@ Change the profile settings in the active Terminal window:
 
 [Read more](https://readmeansrun.com/blog/terminal/applescript/2017/04/15/terminal-app-profiles.html)
 
-## todo
 
-Create items in `Reminders.app` from the command-line
+## beep
 
-    > todo "Pick up milk on the way home"
+Plays the default OS X system beep sound (or another system sound if provided)
+
+    > beep [basso|blowfrog|funk|glass|hero|morse|ping|pop|purr|sosumi|submarine|tink]
+
 
 ## title
 
@@ -55,21 +57,13 @@ Set the custom title of the active `Terminal.app` window
 
     > title "git"
 
-## volume
-
-Set the system volume from the command-line
-
-    > volume 0
-    > volume mute # same as 0
-    > volume 100
-    > volume max # same as 100
-    > volume 50
 
 ## note
 
 Create items in `Notes.app` from the command-line
 
     > cat foo.txt | note "Contents of foo.txt"
+
 
 ## notify
 
@@ -80,12 +74,29 @@ Display a notification
 (Will use [Scripting Notifications](http://www.cooperative-fruitiere.com/notifications/index_en.html) if installed.)
 
 
-## beep
+## resolution
 
-Plays the default OS X system beep sound (or another system sound if provided)
+Display the main screen's resolution
 
-    > beep [basso|blowfrog|funk|glass|hero|morse|ping|pop|purr|sosumi|submarine|tink]
+    > resolution
 
+
+## todo
+
+Create items in `Reminders.app` from the command-line
+
+    > todo "Pick up milk on the way home"
+
+
+## volume
+
+Set the system volume from the command-line
+
+    > volume 0
+    > volume mute # same as 0
+    > volume 100
+    > volume max # same as 100
+    > volume 50
 
 
 ### Disclaimer
