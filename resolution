@@ -1,0 +1,14 @@
+#!/usr/bin/swift
+
+import Darwin
+import Cocoa
+import Foundation
+
+let stdout = FileHandle.standardOutput
+
+if let screen = NSScreen.main {
+  let rect = screen.visibleFrame
+
+  stdout.write("🖥  \(Int(rect.size.width)) × \(Int(rect.size.height))\n".data(using: String.Encoding.utf8)!)
+
+}
