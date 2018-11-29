@@ -32,13 +32,13 @@ if CommandLine.arguments.count == 2
 else if CommandLine.arguments.count > 2
 {
     stderr.write("🚫  Invalid usage\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
-    exit(0)
+    exit(1)
 }
 
 if SOUNDS[target] == nil
 {
     stderr.write("🚫  No beep named \"\(target)\"\n".data(using: String.Encoding.utf8, allowLossyConversion: false)!)
-    exit(0)
+    exit(1)
 }
 
 let url : URL? = URL(string: "file:///System/Library/Sounds/\((target as NSString).capitalized).aiff")
