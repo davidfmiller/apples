@@ -50,6 +50,12 @@ Plays the default OS X system beep sound (or another system sound if provided)
 
     > beep [basso|blowfrog|funk|glass|hero|morse|ping|pop|purr|sosumi|submarine|tink]
 
+## exif
+
+Display exif info for one or more images
+
+    > exif [filenames]
+
 
 ## title
 
