@@ -10,7 +10,7 @@ let stderr = FileHandle.standardError
 var success : Bool = false
 
 if CommandLine.argc == 1 {
-  stderr.write("🚫 Invalid usage\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
+  stderr.write("🚫 Invalid usage: exif [filenames]\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
   exit(1)
 }
 
