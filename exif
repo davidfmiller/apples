@@ -7,8 +7,6 @@ import Cocoa
 let stdout = FileHandle.standardOutput
 let stderr = FileHandle.standardError
 
-var success : Bool = false
-
 if CommandLine.argc == 1 {
   stderr.write("🚫 Invalid usage: exif [filenames]\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
   exit(1)
@@ -19,18 +17,16 @@ let args = CommandLine.arguments[1 ..< CommandLine.arguments.count]
 var count : Int = 0
 for i in args {
 
-  if args.count > 1 {
-    stdout.write("\(count > 0 ? "\n" : "")🖼  \(i)\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
-  }
-
-  let url : URL = NSURL.fileURL(withPath: "\(i)", isDirectory: false) 
+  let url : URL = NSURL.fileURL(withPath: "\(i)", isDirectory: false)
     if let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil) {
       if let tags = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) {
-        success = true
+        if args.count > 1 {
+          stdout.write("\(count > 0 ? "\n" : "")🖼  \(i)\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
+        }
         stdout.write("\(tags)\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
       }
     } else {
-      stderr.write("🚫 No exif data for \(i)\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
+      stderr.write("\(count > 0 ? "\n" : "")🚫 No exif data for \(i)\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
     }
 
     count += 1

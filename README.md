@@ -1,8 +1,6 @@
 # apples
 
-Simple command-line scripts that wrap interaction with Mac applications.
-
-Pretty minimal right now but there's more to come.
+Simple command-line scripts that wrap interaction with macOS applications or are macOS-specific
 
 ## tag
 
