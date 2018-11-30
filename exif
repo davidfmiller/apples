@@ -14,8 +14,6 @@ if CommandLine.argc == 1 {
   exit(1)
 }
 
-//stdout.write("\(CommandLine.arguments)".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
-
 let args = CommandLine.arguments[1 ..< CommandLine.arguments.count]
 
 var count : Int = 0
@@ -36,13 +34,6 @@ for i in args {
     }
 
     count += 1
-//  } else {
-//    stderr.write("🚫 No url \(i)\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
-//  }
 }
 
-//if !success {
-//  stderr.write("🚫 No exif data\n".data(using: String.Encoding.utf8, allowLossyConversion : false)!)
-//  exit(1)
-//}
-//
+exit(0)
