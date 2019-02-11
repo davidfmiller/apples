@@ -1,6 +1,6 @@
 # apples
 
-Simple command-line scripts that wrap interaction with macOS applications or are macOS-specific. Clone the repo and its location to your path, ex:
+Simple command-line scripts that wrap interaction with macOS applications or are macOS-specific. Clone the repo and add its location to your path, ex:
 
     git clone https://github.com/davidfmiller/apples.git ~/Documents/git/apples
     
