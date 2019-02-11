@@ -5,7 +5,6 @@ Simple command-line scripts that wrap interaction with macOS applications or are
     git clone https://github.com/davidfmiller/apples.git ~/Documents/git/apples
     echo 'PATH="$PATH:~/Documents/git/apples' >> ~/.bash_profile
 
-
 ## tag
 
 Set files/folders' Finder tags from the command-line:
