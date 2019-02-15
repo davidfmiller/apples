@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# http://furbo.org/2015/01/19/clearing-the-icon-services-cache-in-yosemite/
+# https://www.perpetual-beta.org/weblog/managing-safari-9s-pinned-tab-cache.html
+
+if [[ "`os`" != "macos" ]]
+then 
+  >&2 echo "🚫  macOS required"
+  exit 1
+fi
+
+# clear safari tab icons
+rm -Rf ~/Library/Safari/Template\ Icons
+
+sudo find /private/var/folders/ \
+  -name com.apple.dock.iconcache -exec rm {} \ &> /dev/null;
+
+sudo find /private/var/folders/ \
+  -name com.apple.iconservices -exec rm -rf {} \ &> /dev/null;
+
+sudo rm -rf /Library/Caches/com.apple.iconservices.store &> /dev/null;
+
+restart
