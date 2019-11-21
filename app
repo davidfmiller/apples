@@ -74,6 +74,8 @@ elif app == 'Earth':
   app = 'Google Earth'
 elif app == 'Hexfiend':
   app = 'Hex Fiend'
+elif app == 'Ia':
+  app = 'iA Writer'
 elif app == 'Capture':
   app = 'Image Capture'
 elif app == 'Maestro':
@@ -110,6 +112,8 @@ else:
 
 cmd = "tell application \"" + app + "\"\n" + cmd + "  activate\nend tell\n"
 f = tempfile.NamedTemporaryFile(delete=False)
+
+# print(cmd)
 
 f.write(cmd)
 
