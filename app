@@ -92,8 +92,8 @@ elif app == 'Prefs' or app == 'Preferences':
   app = 'System Preferences'
 elif app == 'Time':
   app = 'Time Machine'
-elif app == 'Transporter':
-  app = 'Transporter Desktop'
+elif app == 'Vscode':
+  app = 'Visual Studio Code'
 
 if quit:
   cmd = 'quit'
