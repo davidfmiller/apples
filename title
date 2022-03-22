@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -63,7 +63,7 @@ arg = esc(arg)
 cmd = "tell application \"Terminal\"\n  set custom title of window 1 to \"" + esc(arg) + "\"\n end tell\n"
 
 f = tempfile.NamedTemporaryFile(delete=False)
-f.write(cmd)
+f.write(cmd.encode())
 
 if verbose:
   f.seek(0)
