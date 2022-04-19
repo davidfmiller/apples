@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -60,8 +60,8 @@ elif app == 'Hijack':
   app = 'Audio Hijack Pro'
 elif app == 'Bb':
   app = 'BBEdit'
-elif app == 'Coda':
-  app = 'Coda 2'
+# elif app == 'Coda':
+#   app = 'Coda 2'
 elif app == 'Chrome':
   app = 'Google Chrome'
 elif app == 'Mission':
@@ -80,6 +80,8 @@ elif app == 'Capture':
   app = 'Image Capture'
 elif app == 'Maestro':
   app = 'Keyboard Maestro'
+elif app == 'Nova':
+  app = 'Nova'
 elif app == 'Snitch':
   app = 'Little Snitch Configuration'
 elif app == 'Notational':
@@ -115,7 +117,7 @@ f = tempfile.NamedTemporaryFile(delete=False)
 
 # print(cmd)
 
-f.write(cmd)
+f.write(cmd.encode('utf-8'))
 
 if verbose:
   f.seek(0)
