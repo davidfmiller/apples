@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -65,10 +65,10 @@ for arg in args:
   cmd += "  set f to POSIX file \"" + path + "\"\n  set filepath to f as alias\n  set label index of filepath to " + str(tag) + "\n"
 
 if cmd:
-  cmd = "tell application \"Finder\"\n" + cmd + "end tell\n" 
+  cmd = "tell application \"Finder\"\n" + cmd + "end tell\n"
   f = tempfile.NamedTemporaryFile(delete=False)
 
-  f.write(cmd)
+  f.write(cmd.encode('utf-8'))
 
   if verbose:
     f.seek(0)

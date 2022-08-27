@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -97,7 +97,7 @@ for arg in args:
       cmd += "  set due date of r to date \"" + str(due) + "\"\n"
 
   if body:
-    cmd += " set body of r to \"" + esc(body) + "\"\n" 
+    cmd += " set body of r to \"" + esc(body) + "\"\n"
 
   if priority:
     cmd += "  set priority of r to 1\n"
@@ -106,7 +106,7 @@ if len(args):
   cmd = "tell application \"Reminders\"\n" + cmd + "end tell\n"
   f = tempfile.NamedTemporaryFile(delete=False)
 
-  f.write(cmd)
+  f.write(cmd.encode('utf-8'))
 
   if verbose:
     f.seek(0)

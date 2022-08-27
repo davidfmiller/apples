@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -81,7 +81,7 @@ else:
 if len(args) or body:
   cmd = "tell application \"Notes\"\n" + cmd + "end tell\n"
   f = tempfile.NamedTemporaryFile(delete=False)
-  f.write(cmd)
+  f.write(cmd.encode('utf-8'))
 
   if verbose:
     f.seek(0)
